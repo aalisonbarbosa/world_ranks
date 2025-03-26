@@ -16,6 +16,7 @@ import {
 import CountriesTable from "./CountriesTable";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Container from "./Container";
 
 export default function CountryRanking() {
   const [countries, setCountries] = useState([]);
@@ -34,7 +35,7 @@ export default function CountryRanking() {
   }, []);
 
   return (
-    <main className="h-full w-[calc(100%-64px)] max-sm:w-[calc(100%-32px)] absolute top-[-80px] bg-[#1B1D1F] rounded-xl outline-2 outline-[#282B30] shadow-lg flex p-8 text-[#D2D5DA]">
+    <Container>
       <aside className="w-1/4 flex flex-col gap-8">
         <pre>Found {countries.length} countries</pre>
         <fieldset>
@@ -91,6 +92,6 @@ export default function CountryRanking() {
           <p>Caregando...</p>
         )}
       </div>
-    </main>
+    </Container>
   );
 }

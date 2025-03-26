@@ -8,8 +8,14 @@ import {
   TableRow,
 } from "./ui/table";
 import type { Countries } from "@/lib/types";
+import Link from "next/link";
 
-export default function CountriesTable({ countries }:{ countries: Countries[] }) {
+
+export default function CountriesTable({
+  countries,
+}: {
+  countries: Countries[];
+}) {
   return (
     <div>
       <Table>
@@ -26,13 +32,15 @@ export default function CountriesTable({ countries }:{ countries: Countries[] })
           {countries.map((country) => (
             <TableRow key={country.cca3}>
               <TableCell>
-                <Image
-                  src={country.flags.svg}
-                  alt={country.name.common}
-                  width={70}
-                  height={30}
-                  className="rounded-sm"
-                />
+                <Link href={`/countrydetails/${country.cca3}`}>
+                  <Image
+                    src={country.flags.svg}
+                    alt={country.name.common}
+                    width={70}
+                    height={30}
+                    className="rounded-sm"
+                  />
+                </Link>
               </TableCell>
               <TableCell>{country.name.common}</TableCell>
               <TableCell>{country.population.toLocaleString()}</TableCell>
