@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import CountryDetail from "@/components/CountryDetail";
+import CountryDetails from "@/components/CountryDetails";
 
 interface paramsProps {
   params: {
@@ -7,7 +7,7 @@ interface paramsProps {
   };
 }
 
-export default function CountryDetails({ params }: paramsProps) {
+export default function Country_Details({ params }: paramsProps) {
   const { id } = params;
 
   console.log(id);
@@ -16,7 +16,7 @@ export default function CountryDetails({ params }: paramsProps) {
     <>
       <Header />
       <div className="bg-[#1B1D1F] relative min-h-screen flex justify-center">
-        <CountryDetail />
+        <CountryDetails />
       </div>
     </>
   );
