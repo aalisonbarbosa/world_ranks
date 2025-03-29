@@ -1,4 +1,4 @@
-import CountryRanking from "@/components/CountryRanking";
+import CountriesRanking from "@/components/CountriesRanking";
 import Header from "../components/Header";
 
 export default function Home() {
@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Header />
       <div className="bg-[#1B1D1F] relative min-h-screen flex justify-center">
-        <CountryRanking />
+        <CountriesRanking />
       </div>
     </>
   );

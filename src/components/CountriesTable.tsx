@@ -10,7 +10,6 @@ import {
 import type { Countries } from "@/lib/types";
 import Link from "next/link";
 
-
 export default function CountriesTable({
   countries,
 }: {
@@ -36,9 +35,9 @@ export default function CountriesTable({
                   <Image
                     src={country.flags.svg}
                     alt={country.name.common}
-                    width={70}
-                    height={30}
-                    className="rounded-sm"
+                    width={0}
+                    height={0}
+                    className="rounded-sm w-16 h-10"
                   />
                 </Link>
               </TableCell>

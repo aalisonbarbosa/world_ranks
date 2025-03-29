@@ -11,7 +11,7 @@ import StatusFilter from "./StatusFilter";
 import { Button } from "./ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function CountryRanking() {
+export default function CountriesRanking() {
   const [countries, setCountries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 8;
@@ -55,12 +55,10 @@ export default function CountryRanking() {
         </fieldset>
       </aside>
       <div className="w-3/4 flex flex-col justify-between">
-        <div>
-          <div className="flex justify-end items-center pb-6">
-            <SearchInput />
-          </div>
-          <CountriesTable countries={currentCountries} />
+        <div className="flex justify-end items-center">
+          <SearchInput />
         </div>
+        <CountriesTable countries={currentCountries} />
         <div className="flex justify-center gap-2">
           <Button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
