@@ -111,17 +111,17 @@ export default function CountryDetails({
                       <Image
                         src={neighbour.flags.svg}
                         alt={neighbour.name.common}
-                        width={60}
+                        width={70}
                         height={50}
                         className="rounded-md shadow-md"
                       />
-                      <p className="text-xs mt-2">{neighbour.name.common}</p>
+                      
                     </div>
                   </Link>
                 ))}
               </div>
             ) : (
-              <p className="text-center">No neighboring countries found.</p>
+              <p>No neighboring countries found.</p>
             )}
           </div>
         </div>
