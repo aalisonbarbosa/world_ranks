@@ -9,12 +9,16 @@ import {
 } from "./ui/table";
 import type { Countries } from "@/lib/types";
 import Link from "next/link";
+import Loading from "./Loading";
 
 export default function CountriesTable({
   countries,
 }: {
   countries: Countries[];
 }) {
+  if (countries.length == 0) {
+    return <Loading />;
+  }
   return (
     <div>
       <Table>

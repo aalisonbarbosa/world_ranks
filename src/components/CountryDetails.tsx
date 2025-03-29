@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 import Link from "next/link";
 import axios from "axios";
+import Loading from "./Loading";
 
 export default function CountryDetails({
   country,
@@ -35,7 +36,7 @@ export default function CountryDetails({
   if (!country) {
     return (
       <Container width="w-[50%]">
-        <p>Carregando...</p>
+        <Loading />
       </Container>
     );
   }
@@ -47,8 +48,8 @@ export default function CountryDetails({
           <Image
             src={country.flags.svg}
             alt={country.name.common}
-            width={300}
-            height={80}
+            width={250}
+            height={0}
             className="rounded-lg"
           />
           <div className="w-full">
