@@ -1,6 +1,6 @@
 import { Toggle } from "./ui/toggle";
 
-const regions = [
+const regions: string[] = [
   "Americas",
   "Antarctic",
   "Africa",
@@ -9,11 +9,17 @@ const regions = [
   "Oceania",
 ];
 
-export default function RegionFilter() {
+type RegionFilterProps = {
+  toggleContinent: (region: string) => void;
+};
+
+export default function RegionFilter({ toggleContinent }: RegionFilterProps) {
   return (
     <>
       {regions.map((region) => (
-        <Toggle key={region}>{region}</Toggle>
+        <Toggle key={region} onClick={() => toggleContinent(region)}>
+          {region}
+        </Toggle>
       ))}
     </>
   );

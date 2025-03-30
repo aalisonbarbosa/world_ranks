@@ -10,9 +10,11 @@ import RegionFilter from "./RegionFilter";
 import StatusFilter from "./StatusFilter";
 import { Button } from "./ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Countries } from "@/lib/types";
 
 export default function CountriesRanking() {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<Countries[]>([]);
+  const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 8;
 
@@ -29,10 +31,27 @@ export default function CountriesRanking() {
     fetchCountries();
   }, []);
 
+  // Função para alternar continentes selecionados
+  const toggleContinent = (continent: string) => {
+    setSelectedContinents((prev) =>
+      prev.includes(continent)
+        ? prev.filter((c) => c !== continent)
+        : [...prev, continent]
+    );
+  };
+
+  // Filtra países com base nos continentes selecionados
+  const filteredCountries =
+    selectedContinents.length > 0
+      ? countries.filter((country) =>
+          selectedContinents.includes(country.region)
+        )
+      : countries;
+
   // Paginação
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountries = countries.slice(
+  const currentCountries = filteredCountries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
   );
@@ -40,14 +59,14 @@ export default function CountriesRanking() {
   return (
     <Container>
       <aside className="w-1/4 flex flex-col gap-8">
-        <pre>Found {countries.length} countries</pre>
+        <pre>Found {filteredCountries.length} countries</pre>
         <fieldset>
           <legend className="mb-2 text-sm">Sort by</legend>
           <SelectSort />
         </fieldset>
         <fieldset className="flex flex-wrap gap-2 w-3/4">
           <legend className="mb-2 text-sm">Region</legend>
-          <RegionFilter />
+          <RegionFilter toggleContinent={toggleContinent} />
         </fieldset>
         <fieldset className="flex flex-col gap-2">
           <legend className="mb-2 text-sm">Status</legend>
@@ -74,10 +93,10 @@ export default function CountriesRanking() {
           <Button
             onClick={() =>
               setCurrentPage((prev) =>
-                indexOfLastCountry < countries.length ? prev + 1 : prev
+                indexOfLastCountry < filteredCountries.length ? prev + 1 : prev
               )
             }
-            disabled={indexOfLastCountry >= countries.length}
+            disabled={indexOfLastCountry >= filteredCountries.length}
             className="w-32 bg-[#282B30] rounded disabled:opacity-50"
           >
             next
