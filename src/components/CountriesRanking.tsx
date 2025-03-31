@@ -16,6 +16,13 @@ export default function CountriesRanking() {
   const [countries, setCountries] = useState<Countries[]>([]);
   const [search, setSearch] = useState("");
   const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
+  const [filters, setFilters] = useState<{
+    member: boolean;
+    independent: boolean;
+  }>({
+    member: false,
+    independent: false,
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 8;
 
@@ -36,7 +43,7 @@ export default function CountriesRanking() {
     fetchCountries();
   }, []);
 
-  // orderna países com base na ordem selecionada
+  // Ordena os países com base na ordem selecionada
   const sortCountries = (sort: string) => {
     const sortedCountries = [...countries];
 
@@ -53,7 +60,7 @@ export default function CountriesRanking() {
     setCountries(sortedCountries);
   };
 
-  // Função para alternar continentes selecionados
+  // Alterna continentes selecionados
   const toggleContinent = (continent: string) => {
     setSelectedContinents((prev) =>
       prev.includes(continent)
@@ -63,13 +70,28 @@ export default function CountriesRanking() {
     setCurrentPage(1);
   };
 
-  // Filtra países com base no input de pesquisa e continentes selecionados
-  const filteredCountries = countries.filter(
-    (country) =>
-      country.name.common.toLowerCase().includes(search.toLowerCase()) &&
-      (selectedContinents.length === 0 ||
-        selectedContinents.includes(country.region))
-  );
+  // Atualiza os filtros de status
+  const handleCheckboxChange = (key: "member" | "independent") => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  // Filtra países com base no input de pesquisa, continentes e status selecionado
+  const filteredCountries = countries.filter((country) => {
+    const matchesSearch = country.name.common
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const matchesContinent =
+      selectedContinents.length === 0 ||
+      selectedContinents.includes(country.region);
+    const matchesStatus =
+      (!filters.member || country.unMember) &&
+      (!filters.independent || country.independent);
+
+    return matchesSearch && matchesContinent && matchesStatus;
+  });
 
   // Paginação
   const indexOfLastCountry = currentPage * countriesPerPage;
@@ -93,7 +115,10 @@ export default function CountriesRanking() {
         </fieldset>
         <fieldset className="flex flex-col gap-2">
           <legend className="mb-2 text-sm">Status</legend>
-          <StatusFilter />
+          <StatusFilter
+            filters={filters}
+            handleCheckboxChange={handleCheckboxChange}
+          />
         </fieldset>
       </aside>
       <div className="w-3/4 flex flex-col justify-between">

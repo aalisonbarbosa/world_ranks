@@ -21,4 +21,6 @@ export type Countries = {
   flags: {
     svg: string;
   };
+  independent: boolean;
+  unMember: boolean;
 };
