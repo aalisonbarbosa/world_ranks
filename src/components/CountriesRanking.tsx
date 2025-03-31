@@ -8,9 +8,8 @@ import SearchInput from "./SearchInput";
 import SortOrderSelect from "./SortOrderSelect";
 import RegionFilterToggle from "./RegionFilterToggle";
 import StatusFilter from "./StatusFilter";
-import { Button } from "./ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Countries } from "@/lib/types";
+import PaginationButtons from "./PaginationButtons";
 
 export default function CountriesRanking() {
   const [countries, setCountries] = useState<Countries[]>([]);
@@ -128,31 +127,12 @@ export default function CountriesRanking() {
         <div className="h-[632px]">
           <CountriesTable countries={currentCountries} />
         </div>
-        <div className="flex justify-center gap-2">
-          <Button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="w-32 bg-[#282B30] rounded disabled:opacity-50"
-          >
-            <ArrowLeft />
-            previous
-          </Button>
-          <span className="w-12 flex items-center justify-center bg-[#282B30]">
-            {currentPage}
-          </span>
-          <Button
-            onClick={() =>
-              setCurrentPage((prev) =>
-                indexOfLastCountry < filteredCountries.length ? prev + 1 : prev
-              )
-            }
-            disabled={indexOfLastCountry >= filteredCountries.length}
-            className="w-32 bg-[#282B30] rounded disabled:opacity-50"
-          >
-            next
-            <ArrowRight />
-          </Button>
-        </div>
+        <PaginationButtons
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          indexOfLastCountry={indexOfLastCountry}
+          filteredCountries={filteredCountries}
+        />
       </div>
     </Container>
   );
