@@ -13,7 +13,9 @@ type RegionFilterProps = {
   toggleContinent: (region: string) => void;
 };
 
-export default function RegionFilter({ toggleContinent }: RegionFilterProps) {
+export default function RegionFilterToggle({
+  toggleContinent,
+}: RegionFilterProps) {
   return (
     <>
       {regions.map((region) => (

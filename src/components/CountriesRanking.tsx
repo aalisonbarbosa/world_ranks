@@ -6,7 +6,7 @@ import Container from "./Container";
 import { useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import SortOrderSelect from "./SortOrderSelect";
-import RegionFilter from "./RegionFilter";
+import RegionFilterToggle from "./RegionFilterToggle";
 import StatusFilter from "./StatusFilter";
 import { Button } from "./ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -14,6 +14,7 @@ import { Countries } from "@/lib/types";
 
 export default function CountriesRanking() {
   const [countries, setCountries] = useState<Countries[]>([]);
+  const [search, setSearch] = useState("");
   const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 8;
@@ -35,33 +36,7 @@ export default function CountriesRanking() {
     fetchCountries();
   }, []);
 
-  // Função para alternar continentes selecionados
-  const toggleContinent = (continent: string) => {
-    setSelectedContinents((prev) =>
-      prev.includes(continent)
-        ? prev.filter((c) => c !== continent)
-        : [...prev, continent]
-    );
-    setCurrentPage(1);
-  };
-
-  // Filtra países com base nos continentes selecionados
-  const filteredCountries =
-    selectedContinents.length > 0
-      ? countries.filter((country) =>
-          selectedContinents.includes(country.region)
-        )
-      : countries;
-
-  // Paginação
-  const indexOfLastCountry = currentPage * countriesPerPage;
-  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountries = filteredCountries.slice(
-    indexOfFirstCountry,
-    indexOfLastCountry
-  );
-
-  // orderna países com base na escolha selecionada
+  // orderna países com base na ordem selecionada
   const sortCountries = (sort: string) => {
     const sortedCountries = [...countries];
 
@@ -78,6 +53,32 @@ export default function CountriesRanking() {
     setCountries(sortedCountries);
   };
 
+  // Função para alternar continentes selecionados
+  const toggleContinent = (continent: string) => {
+    setSelectedContinents((prev) =>
+      prev.includes(continent)
+        ? prev.filter((c) => c !== continent)
+        : [...prev, continent]
+    );
+    setCurrentPage(1);
+  };
+
+  // Filtra países com base no input de pesquisa e continentes selecionados
+  const filteredCountries = countries.filter(
+    (country) =>
+      country.name.common.toLowerCase().includes(search.toLowerCase()) &&
+      (selectedContinents.length === 0 ||
+        selectedContinents.includes(country.region))
+  );
+
+  // Paginação
+  const indexOfLastCountry = currentPage * countriesPerPage;
+  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+  const currentCountries = filteredCountries.slice(
+    indexOfFirstCountry,
+    indexOfLastCountry
+  );
+
   return (
     <Container>
       <aside className="w-1/4 flex flex-col gap-8">
@@ -88,7 +89,7 @@ export default function CountriesRanking() {
         </fieldset>
         <fieldset className="flex flex-wrap gap-2 w-3/4">
           <legend className="mb-2 text-sm">Region</legend>
-          <RegionFilter toggleContinent={toggleContinent} />
+          <RegionFilterToggle toggleContinent={toggleContinent} />
         </fieldset>
         <fieldset className="flex flex-col gap-2">
           <legend className="mb-2 text-sm">Status</legend>
@@ -97,7 +98,7 @@ export default function CountriesRanking() {
       </aside>
       <div className="w-3/4 flex flex-col justify-between">
         <div className="flex justify-end items-center">
-          <SearchInput />
+          <SearchInput setSearch={setSearch} />
         </div>
         <div className="h-[632px]">
           <CountriesTable countries={currentCountries} />
