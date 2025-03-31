@@ -5,7 +5,7 @@ import axios from "axios";
 import Container from "./Container";
 import { useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
-import SelectSort from "./SelectSort";
+import SortOrderSelect from "./SortOrderSelect";
 import RegionFilter from "./RegionFilter";
 import StatusFilter from "./StatusFilter";
 import { Button } from "./ui/button";
@@ -22,7 +22,11 @@ export default function CountriesRanking() {
     const fetchCountries = async () => {
       try {
         const response = await axios.get("https://restcountries.com/v3.1/all");
-        setCountries(response.data);
+        const sortedCountries = response.data.sort(
+          (a: Countries, b: Countries) => b.population - a.population
+        );
+
+        setCountries(sortedCountries);
       } catch (error) {
         console.error("Erro ao buscar países:", error);
       }
@@ -38,6 +42,7 @@ export default function CountriesRanking() {
         ? prev.filter((c) => c !== continent)
         : [...prev, continent]
     );
+    setCurrentPage(1);
   };
 
   // Filtra países com base nos continentes selecionados
@@ -56,13 +61,30 @@ export default function CountriesRanking() {
     indexOfLastCountry
   );
 
+  // orderna países com base na escolha selecionada
+  const sortCountries = (sort: string) => {
+    const sortedCountries = [...countries];
+
+    if (sort === "area") {
+      sortedCountries.sort((a, b) => b.area - a.area);
+    } else if (sort === "population") {
+      sortedCountries.sort((a, b) => b.population - a.population);
+    } else {
+      sortedCountries.sort((a, b) =>
+        a.name.common.localeCompare(b.name.common)
+      );
+    }
+
+    setCountries(sortedCountries);
+  };
+
   return (
     <Container>
       <aside className="w-1/4 flex flex-col gap-8">
         <pre>Found {filteredCountries.length} countries</pre>
         <fieldset>
           <legend className="mb-2 text-sm">Sort by</legend>
-          <SelectSort />
+          <SortOrderSelect sortCountries={sortCountries} />
         </fieldset>
         <fieldset className="flex flex-wrap gap-2 w-3/4">
           <legend className="mb-2 text-sm">Region</legend>
@@ -77,7 +99,9 @@ export default function CountriesRanking() {
         <div className="flex justify-end items-center">
           <SearchInput />
         </div>
-        <CountriesTable countries={currentCountries} />
+        <div className="h-[632px]">
+          <CountriesTable countries={currentCountries} />
+        </div>
         <div className="flex justify-center gap-2">
           <Button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

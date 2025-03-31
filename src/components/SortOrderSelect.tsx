@@ -7,16 +7,22 @@ import {
   SelectValue,
 } from "./ui/select";
 
-export default function SelectSort() {
+type SortCountriesProps = {
+  sortCountries: (sort: string) => void;
+};
+
+export default function SortOrderSelect({ sortCountries }: SortCountriesProps) {
   return (
-    <Select>
+    <Select
+      onValueChange={(value) => sortCountries(value)}
+      defaultValue="population"
+    >
       <SelectTrigger className="w-[240px]">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectItem value="population">Population</SelectItem>
-          <SelectItem value="name">Name</SelectItem>
           <SelectItem value="alphabetical">Alphabetical Order</SelectItem>
           <SelectItem value="area">Área (km²)</SelectItem>
         </SelectGroup>
