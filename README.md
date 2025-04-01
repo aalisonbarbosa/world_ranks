@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# World Ranks
 
-## Getting Started
+Este projeto é uma solução para o desafio "Country Page - WorldRanks" do [devChallenges](https://devchallenges.io/challenge/country-page).
 
-First, run the development server:
+### Descrição
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+World Ranks é uma aplicação web que exibe uma lista de países com informações detalhadas, permitindo filtrar e classificar os dados.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tecnologias
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** – Framework React para aplicações web.
+- **TypeScript** – Superset do JavaScript com tipagem estática.
+- **Tailwind CSS** – Framework CSS utilitário para estilização responsiva.
+- **ShadCN UI** – Biblioteca de componentes acessíveis e estilizados.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Funcionalidades
 
-## Learn More
+- Busca de países por nome.
+- Filtragem de países por região e status.
+- Ordenação por nome, população, área e outros critérios.
+- Paginação para melhor navegação.
 
-To learn more about Next.js, take a look at the following resources:
+### Contribuição
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Licença
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto está sob a Licença MIT.
