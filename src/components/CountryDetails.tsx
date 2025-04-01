@@ -57,7 +57,7 @@ export default function CountryDetails({
               {country.name.common}
             </h1>
             <p className="text-center">{country.name.official}</p>
-            <div className="flex justify-around mt-4">
+            <div className="flex flex-wrap justify-around mt-4 gap-2">
               <div className="flex gap-4 bg-[#282B30] p-4 rounded-lg max-md:text-sm">
                 <p>Population</p>
                 {country.population.toLocaleString()}
@@ -113,7 +113,7 @@ export default function CountryDetails({
                         alt={neighbour.name.common}
                         width={0}
                         height={0}
-                        className="rounded-md shadow-md w-16 h-12"
+                        className="rounded-md shadow-md w-16 h-12 max-sm:w-12 max-sm:h-8"
                       />
                     </div>
                   </Link>

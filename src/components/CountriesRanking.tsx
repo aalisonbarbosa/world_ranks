@@ -124,7 +124,7 @@ export default function CountriesRanking() {
             />
           </fieldset>
         </aside>
-        <div className="min-md:w-3/4 flex flex-col justify-between max-md:pt-2 gap-2">
+        <div className="min-md:w-3/4 flex flex-col justify-between max-md:pt-2 gap-2 min-md:h-[728px]">
           <div className="flex justify-end items-center max-md:hidden">
             <SearchInput setSearch={setSearch} />
           </div>
