@@ -5,16 +5,22 @@ import { Input } from "./ui/input";
 
 interface SearchInputProps {
   setSearch: (value: string) => void;
+  customClass?: string;
 }
 
-export default function SearchInput({ setSearch }: SearchInputProps) {
+export default function SearchInput({
+  setSearch,
+  customClass,
+}: SearchInputProps) {
   return (
-    <div className="relative w-[380px] h-10 flex items-center justify-items-start">
+    <div
+      className={`relative ${customClass} h-10 flex items-center justify-items-start`}
+    >
       <Search className="absolute ml-2" />
       <Input
-        placeholder="Search by Name, Region, Subregion"
+        placeholder="Search by Name"
         type="text"
-        className="pl-10 placeholder:font-bold h-full"
+        className="pl-10 min-md:placeholder:font-bold h-full"
         onChange={(e) => setSearch(e.target.value)}
       />
     </div>

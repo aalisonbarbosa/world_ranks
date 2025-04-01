@@ -28,13 +28,13 @@ export default function CountriesTable({
             <TableHead>Name</TableHead>
             <TableHead>Population</TableHead>
             <TableHead>Area(km²)</TableHead>
-            <TableHead>Region</TableHead>
+            <TableHead className="max-lg:hidden">Region</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {countries.map((country) => (
             <TableRow key={country.cca3}>
-              <TableCell>
+              <TableCell className="max-md:pl-2">
                 <Link href={`/countrydetails/${country.cca3}`}>
                   <Image
                     src={country.flags.svg}
@@ -45,10 +45,12 @@ export default function CountriesTable({
                   />
                 </Link>
               </TableCell>
-              <TableCell>{country.name.common}</TableCell>
+              <TableCell className="max-md:px-2">
+                {country.name.common}
+              </TableCell>
               <TableCell>{country.population.toLocaleString()}</TableCell>
               <TableCell>{country.area.toLocaleString()}</TableCell>
-              <TableCell>{country.region}</TableCell>
+              <TableCell className="max-lg:hidden">{country.region}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -17,7 +17,7 @@ export default function SortOrderSelect({ sortCountries }: SortCountriesProps) {
       onValueChange={(value) => sortCountries(value)}
       defaultValue="population"
     >
-      <SelectTrigger className="w-[240px]">
+      <SelectTrigger className="w-[80%] max-md:w-full">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>

@@ -35,14 +35,14 @@ export default function CountryDetails({
 
   if (!country) {
     return (
-      <Container width="w-[50%]">
+      <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%]">
         <Loading />
       </Container>
     );
   }
 
   return (
-    <Container width="w-[50%]">
+    <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%]">
       <div className="w-full relative">
         <div className="flex flex-col items-center gap-4 w-full h-[calc(100%+100px)] absolute top-[-80px]">
           <Image
@@ -58,11 +58,11 @@ export default function CountryDetails({
             </h1>
             <p className="text-center">{country.name.official}</p>
             <div className="flex justify-around mt-4">
-              <div className="flex gap-4 bg-[#282B30] p-4 rounded-lg">
+              <div className="flex gap-4 bg-[#282B30] p-4 rounded-lg max-md:text-sm">
                 <p>Population</p>
                 {country.population.toLocaleString()}
               </div>
-              <div className="flex gap-4 bg-[#282B30] p-4 rounded-lg">
+              <div className="flex gap-4 bg-[#282B30] p-4 rounded-lg max-md:text-sm">
                 <p>Área(km²)</p>
                 {country.area.toLocaleString()}
               </div>
@@ -98,7 +98,7 @@ export default function CountryDetails({
               </TableRow>
             </TableBody>
           </Table>
-          <div className="w-full">
+          <div className="w-full max-md:px-2">
             <h2 className="text-start mb-4">Neighboring Countries</h2>
             {neighbours.length > 0 ? (
               <div className="flex flex-wrap items-center gap-2">
@@ -111,11 +111,10 @@ export default function CountryDetails({
                       <Image
                         src={neighbour.flags.svg}
                         alt={neighbour.name.common}
-                        width={70}
-                        height={50}
-                        className="rounded-md shadow-md"
+                        width={0}
+                        height={0}
+                        className="rounded-md shadow-md w-16 h-12"
                       />
-                      
                     </div>
                   </Link>
                 ))}
