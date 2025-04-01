@@ -16,6 +16,7 @@ World Ranks é uma aplicação web que exibe uma lista de países com informaç�
 ### Funcionalidades
 
 - Busca de países por nome.
+- Filtragem de países por região e status.
 - Ordenação por nome, população, área e outros critérios.
 - Paginação para melhor navegação.
 
