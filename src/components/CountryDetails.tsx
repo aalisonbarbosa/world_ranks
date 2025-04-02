@@ -35,16 +35,16 @@ export default function CountryDetails({
 
   if (!country) {
     return (
-      <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%]">
+      <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%] min-md:min-h-[828px]">
         <Loading />
       </Container>
     );
   }
 
   return (
-    <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%]">
+    <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%] min-h-[828px]">
       <div className="w-full relative">
-        <div className="flex flex-col items-center gap-4 w-full h-[calc(100%+100px)] absolute top-[-80px]">
+        <div className="flex flex-col items-center gap-4 w-full h-full absolute top-[-80px]">
           <Image
             src={country.flags.svg}
             alt={country.name.common}

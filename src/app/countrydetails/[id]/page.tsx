@@ -33,7 +33,7 @@ export default function Country_Details({ params }: paramsProps) {
   return (
     <>
       <Header />
-      <div className="relative min-h-screen flex justify-center bg-[#1B1D1F]">
+      <div className="relative min-h-[828px] flex justify-center bg-[#1B1D1F]">
         <CountryDetails country={country} />
       </div>
     </>

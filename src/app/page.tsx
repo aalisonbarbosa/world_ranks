@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="relative flex justify-center min-h-screen max-md:min-h-[1124px] max-sm:min-h-[1168px] bg-[#1B1D1F]">
+      <div className="relative flex justify-center h-[776px] max-md:min-h-[1124px] max-sm:min-h-[1168px] bg-[#1B1D1F]">
         <CountriesRanking />
       </div>
     </>

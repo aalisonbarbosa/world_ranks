@@ -101,7 +101,7 @@ export default function CountriesRanking() {
   );
 
   return (
-    <Container customClass="max-md:h-min w-[calc(100%-64px)]">
+    <Container customClass="w-[calc(100%-64px)] h-min">
       <div className="flex gap-2 w-full max-md:flex-col max-md:py-6">
         <aside className="min-md:w-1/4 flex flex-col min-md:gap-8 gap-4 max-md:px-6">
           <pre>Found {filteredCountries.length} countries</pre>
