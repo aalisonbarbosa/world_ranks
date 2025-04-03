@@ -7,6 +7,11 @@ body {
 .bg-hero {
   background-image: url(../../public/hero-image.jpg);
 }
+@media (max-width: 640px) {
+  .bg-hero {
+    background-image: url(../../public/hero-image-sm.jpg);
+  }
+}
 
 ::-webkit-scrollbar {
   display: none;

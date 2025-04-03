@@ -35,8 +35,8 @@ export default function CountryDetails({
 
   if (!country) {
     return (
-      <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%] min-md:min-h-[828px]">
-        <Loading />
+      <Container customClass="w-[60%] max-md:top-[-60px] max-lg:min-sm:w-[75%] h-[828px]">
+          <Loading />
       </Container>
     );
   }
