@@ -22,7 +22,7 @@ export default function CountriesRanking() {
     member: false,
     independent: false,
   });
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const countriesPerPage = 8;
 
   useEffect(() => {
@@ -106,7 +106,11 @@ export default function CountriesRanking() {
         <aside className="min-md:w-1/4 flex flex-col min-md:gap-8 gap-4 max-md:px-6">
           <pre>Found {filteredCountries.length} countries</pre>
           <div className="flex justify-end items-center min-md:hidden">
-            <SearchInput setSearch={setSearch} customClass="w-full" />
+            <SearchInput
+              setSearch={setSearch}
+              setCurrentPage={setCurrentPage}
+              customClass="w-full"
+            />
           </div>
           <fieldset>
             <legend className="mb-2 text-sm">Sort by</legend>
@@ -121,12 +125,16 @@ export default function CountriesRanking() {
             <StatusFilter
               filters={filters}
               handleCheckboxChange={handleCheckboxChange}
+              setCurrentPage={setCurrentPage}
             />
           </fieldset>
         </aside>
         <div className="min-md:w-3/4 flex flex-col justify-between max-md:pt-2 gap-2 min-md:h-[728px]">
           <div className="flex justify-end items-center max-md:hidden">
-            <SearchInput setSearch={setSearch} />
+            <SearchInput
+              setSearch={setSearch}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
           <div className="h-[632px]">
             <CountriesTable countries={currentCountries} />

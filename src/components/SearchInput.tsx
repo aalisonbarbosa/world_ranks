@@ -6,11 +6,13 @@ import { Input } from "./ui/input";
 interface SearchInputProps {
   setSearch: (value: string) => void;
   customClass?: string;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function SearchInput({
   setSearch,
   customClass,
+  setCurrentPage,
 }: SearchInputProps) {
   return (
     <div
@@ -21,7 +23,10 @@ export default function SearchInput({
         placeholder="Search by Name"
         type="text"
         className="pl-10 min-md:placeholder:font-bold h-full"
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setCurrentPage(1);
+        }}
       />
     </div>
   );
